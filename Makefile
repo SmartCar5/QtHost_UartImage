@@ -236,6 +236,7 @@ Makefile: QTImage.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\qt_config.prf \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\exclusive_builds.prf \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\common\msvc-version.conf \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\toolchain.prf \
@@ -266,7 +267,6 @@ Makefile: QTImage.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Core.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\qtmain.prl \
-		.qmake.stash \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\build_pass.prf \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.prl \
@@ -426,6 +426,7 @@ Makefile: QTImage.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\qt_config.prf:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\spec_post.prf:
+.qmake.stash:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\exclusive_builds.prf:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\common\msvc-version.conf:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\toolchain.prf:
@@ -456,7 +457,6 @@ QTImage.pro:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Core.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\qtmain.prl:
-.qmake.stash:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\build_pass.prf:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.prl:

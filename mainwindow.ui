@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabSerial">
      <attribute name="title">
@@ -403,7 +403,7 @@
         <number>5</number>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButtonStream">
        <property name="geometry">
         <rect>
          <x>10</x>

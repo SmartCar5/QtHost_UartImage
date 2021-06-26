@@ -5,6 +5,7 @@
 #include <QSerialPort>        //提供访问串口的功能
 #include <QSerialPortInfo>    //提供系统中存在的串口的信息
 #include "formimagelist.h"
+#include "streamform.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,13 +50,16 @@ private slots:
 
     void on_pushButtonTimer_clicked();
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
+
+    void on_pushButtonStream_clicked();
 
 private:
     Ui::MainWindow *ui;
     bool isSerialOpened;
     bool isDispImg;
     bool imgFlag;
+    bool dataFlag;
     bool isSave;
     bool isStream;
     bool isTimerOn;

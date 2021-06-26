@@ -8,6 +8,8 @@
 #include <QFileDialog>
 #include "image.h"
 
+uint8_t dataBuffer[40];
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -23,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     isSerialOpened = false;
     isDispImg = false;
     imgFlag = false;
+    dataFlag = false;
     isSave = false;
     isStream = false;
     isTimerOn = false;
@@ -80,10 +83,11 @@ void MainWindow::serialPort_readyRead()
             //从接收缓冲区中读取数据
             QByteArray buffer = serial.readAll();
             //从界面中读取以前收到的数据
-            QString recv = ui->textEdit->toPlainText();
-            recv += QString(buffer.toHex());
+            //QString recv = ui->textEdit->toPlainText();
+            //recv += QString(buffer.toHex());
+            QString recv= QString(buffer.toHex());
             //清空以前的显示
-            ui->textEdit->clear();
+            //ui->textEdit->clear();
             //重新显示
             ui->textEdit->append(recv);
         }
@@ -104,18 +108,50 @@ void MainWindow::serialPort_readData()
         SerialBuffer.clear();
         nowReadSize = 0;
         nowFlag = 0;
-        imgFlag = false;
+        dataFlag = false;
     }
-    if(nowFlag==0)
+    if(nowFlag==0&&dataFlag==false)
     {
+        memset(&dataBuffer[0],0,40);
         QByteArray buffer = serial.readAll();
-        if((uint8_t)buffer.data()[0]==(uint8_t)3&&(uint8_t)buffer.data()[1]==(uint8_t)~3)
+        if(buffer.length()>=2&&(uint8_t)buffer.data()[0]==(uint8_t)3&&(uint8_t)buffer.data()[1]==(uint8_t)~3)
         {
             nowFlag = 1;
+            for(int i = 2;i<buffer.length();i++)
+            {
+                //if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
+                SerialBuffer.append(buffer.data()[i]);
+                if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
+                {
+                    buffer = serial.readAll();
+                    memcpy(&dataBuffer[0],SerialBuffer.data(),40);
+                    SerialBuffer.clear();
+                    nowFlag = 0;
+                    dataFlag = true;
+                    break;
+                    //nowFlag = 2;
+                }
+            }
         }
     }
     else if(nowFlag==1)
     {
+        QByteArray buffer = serial.readAll();
+        for(int i = 0;i<buffer.length();i++)
+        {
+            //if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
+            SerialBuffer.append(buffer.data()[i]);
+            if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
+            {
+                buffer = serial.readAll();
+                memcpy(&dataBuffer[0],SerialBuffer.data(),40);
+                SerialBuffer.clear();
+                nowFlag = 0;
+                dataFlag = true;
+                break;
+                //nowFlag = 2;
+            }
+        }
 
     }
 }
@@ -131,11 +167,12 @@ void MainWindow::serialPort_readImage()
     if(nowFlag==0&&imgFlag==false)
     {
         QByteArray buffer = serial.readAll();
-        if((uint8_t)buffer.data()[0]==(uint8_t)3&&(uint8_t)buffer.data()[1]==(uint8_t)~3)
+        if(buffer.length()>=2&&(uint8_t)buffer.data()[0]==(uint8_t)3&&(uint8_t)buffer.data()[1]==(uint8_t)~3)
         {
             /*SerialBuffer.append(&buffer.data()[2]);
             nowReadSize+=(buffer.length()-2);
             nowFlag = 1;*/
+            nowFlag = 1;
             for(int i = 2;i<buffer.length();i++)
             {
                 SerialBuffer.append(buffer.data()[i]);
@@ -152,7 +189,7 @@ void MainWindow::serialPort_readImage()
                     //nowFlag = 2;
                 }
             }
-            nowFlag = 1;
+            //nowFlag = 1;
         }
     }
     else if(nowFlag==1)
@@ -419,8 +456,15 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButtonSaveImage_clicked()
 {
-    path = QFileDialog::getExistingDirectory(this, "choose src Directory","D:\\CODE\\");
-    isSave = true;
+    if(isSave == true)
+    {
+        isSave = false;
+    }
+    else
+    {
+        path = QFileDialog::getExistingDirectory(this, "choose src Directory","D:\\CODE\\");
+        isSave = true;
+    }
 }
 
 void MainWindow::on_pushButtonStop_clicked()
@@ -444,21 +488,27 @@ void MainWindow::on_pushButtonTimer_clicked()
         connect(cTimer, SIGNAL(timeout()), this, SLOT(timerCallBack()));
         cTimer->start(50);
         ui->pushButtonTimer->setText("暂停");
+        isTimerOn = true;
     }
     else if(click_times%3==1)
     {
         cTimer->start(50);
         ui->pushButtonTimer->setText("暂停");
+        isTimerOn = true;
     }
     else if(click_times%3==2)
     {
         cTimer->stop();
         ui->pushButtonTimer->setText("停止");
+        isTimerOn = false;
+        time_ms = 0;
+        //ui->lcdNumberTimer->display(0);
     }
     else if(click_times%3==0)
     {
         time_ms = 0;
         ui->pushButtonTimer->setText("发车计时");
+        ui->lcdNumberTimer->display(0);
     }
 }
 void MainWindow::timerCallBack()
@@ -470,7 +520,14 @@ void MainWindow::timerCallBack()
     }
 }
 
-void MainWindow::on_pushButton_clicked()
+//void MainWindow::on_pushButton_clicked()
+//{
+//    isStream = !isStream;
+//}
+
+void MainWindow::on_pushButtonStream_clicked()
 {
     isStream = !isStream;
+    static streamForm S;
+    S.show();
 }

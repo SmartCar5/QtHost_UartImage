@@ -12,16 +12,19 @@ SOURCES += \
     formimagelist.cpp \
     image.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    streamform.cpp
 
 HEADERS += \
     formimagelist.h \
     image.h \
-    mainwindow.h
+    mainwindow.h \
+    streamform.h
 
 FORMS += \
     formimagelist.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    streamform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

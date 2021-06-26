@@ -64,7 +64,7 @@ public:
     QGroupBox *groupBox_4;
     QPushButton *pushButtonTimer;
     QLCDNumber *lcdNumberTimer;
-    QPushButton *pushButton;
+    QPushButton *pushButtonStream;
     QWidget *tabImage;
     QGroupBox *groupBox_5;
     QLabel *label;
@@ -184,9 +184,9 @@ public:
         lcdNumberTimer->setGeometry(QRect(150, 10, 101, 41));
         lcdNumberTimer->setSmallDecimalPoint(false);
         lcdNumberTimer->setDigitCount(5);
-        pushButton = new QPushButton(groupBox_4);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(10, 60, 93, 28));
+        pushButtonStream = new QPushButton(groupBox_4);
+        pushButtonStream->setObjectName(QString::fromUtf8("pushButtonStream"));
+        pushButtonStream->setGeometry(QRect(10, 60, 93, 28));
         tabWidget->addTab(tabData, QString());
         tabImage = new QWidget();
         tabImage->setObjectName(QString::fromUtf8("tabImage"));
@@ -224,7 +224,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -254,7 +254,7 @@ public:
         pushButtonLaunch->setText(QCoreApplication::translate("MainWindow", "\345\217\221\351\200\201", nullptr));
         groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "\351\242\204\347\225\231\345\212\237\350\203\275", nullptr));
         pushButtonTimer->setText(QCoreApplication::translate("MainWindow", "\345\217\221\350\275\246\350\256\241\346\227\266", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "\346\265\201\346\250\241\345\274\217", nullptr));
+        pushButtonStream->setText(QCoreApplication::translate("MainWindow", "\346\265\201\346\250\241\345\274\217", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabData), QCoreApplication::translate("MainWindow", "\344\274\240\346\225\260\346\215\256", nullptr));
         groupBox_5->setTitle(QCoreApplication::translate("MainWindow", "\345\233\276\347\211\207", nullptr));
         label->setText(QString());

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "image.h"
 #include <QList>
+#include <QTableWidgetItem>
 
 namespace Ui {
 class FormImageList;
@@ -23,6 +24,7 @@ public:
     void changeData(T src);
 public:
     T data;
+    T* dataPtr;
     T* ptr;
     QString name;
     IOSTATUS stat;
@@ -56,6 +58,8 @@ public:
 private slots:
     void on_tableWidget_cellEntered(int row, int column);
     void refreshVars();
+
+    void on_tableWidget_itemEntered(QTableWidgetItem *item);
 
 private:
     Ui::FormImageList *ui;

@@ -23,6 +23,7 @@ ImageVar<T>::ImageVar(T* pdata,QString sname,IOSTATUS sstat)
 {
     ptr = pdata;
     data = *pdata;
+    dataPtr = &data;
     name = sname;
     stat = sstat;
 }
@@ -30,6 +31,7 @@ template<typename T>
 void ImageVar<T>::changeData(T src)
 {
     data = src;
+    *ptr = src;
 }
 template<typename T1>
 ImageVarList<T1>::ImageVarList()
@@ -142,7 +144,8 @@ void FormImageList::refreshVars()
         }
         else
         {
-            *(intList.read(i).ptr) = intList.read(i).data;
+            //intList.read(i).changeData(*intList.read(i).ptr);
+            *(intList.read(i).dataPtr) = *intList.read(i).ptr;
             if((uint)ui->tableWidget->currentRow()!=i)
             {
                 ui->tableWidget->setItem(i,1,new QTableWidgetItem(QString("%1").arg(intList.read(i).data)));
@@ -158,7 +161,8 @@ void FormImageList::refreshVars()
         }
         else
         {
-            *(floatList.read(i).ptr) = floatList.read(i).data;
+            //floatList.read(i).changeData(*floatList.read(i).ptr);
+            *(floatList.read(i).dataPtr) = *floatList.read(i).ptr;
             if((uint)ui->tableWidget->currentRow()!=i+intList.length)
             {
                 ui->tableWidget->setItem(i+intList.length,1,new QTableWidgetItem(QString("%1").arg(floatList.read(i).data)));
@@ -182,5 +186,23 @@ void FormImageList::on_tableWidget_cellEntered(int row, int column)
     {
         int temp = ui->tableWidget->item(row,column)->text().toFloat();
         floatList.read(row-intList.length).changeData(temp);
+    }
+}
+
+void FormImageList::on_tableWidget_itemEntered(QTableWidgetItem *item)
+{
+    if(item->column() == 0)
+    {
+        return;
+    }
+    if((uint)item->row()>intList.length)
+    {
+        int temp = item->text().toFloat();
+        floatList.read(item->row()-intList.length).changeData(temp);
+    }
+    else
+    {
+        int temp = item->text().toInt();
+        intList.read(item->row()).changeData(temp);
     }
 }

@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[17];
-    char stringdata0[370];
+    char stringdata0[376];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +48,7 @@ QT_MOC_LITERAL(12, 239, 30), // "on_pushButtonSaveImage_clicked"
 QT_MOC_LITERAL(13, 270, 25), // "on_pushButtonStop_clicked"
 QT_MOC_LITERAL(14, 296, 24), // "on_pushButtonFix_clicked"
 QT_MOC_LITERAL(15, 321, 26), // "on_pushButtonTimer_clicked"
-QT_MOC_LITERAL(16, 348, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(16, 348, 27) // "on_pushButtonStream_clicked"
 
     },
     "MainWindow\0on_pushButtonRefresh_clicked\0"
@@ -62,7 +62,7 @@ QT_MOC_LITERAL(16, 348, 21) // "on_pushButton_clicked"
     "on_pushButtonStop_clicked\0"
     "on_pushButtonFix_clicked\0"
     "on_pushButtonTimer_clicked\0"
-    "on_pushButton_clicked"
+    "on_pushButtonStream_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -136,7 +136,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->on_pushButtonStop_clicked(); break;
         case 12: _t->on_pushButtonFix_clicked(); break;
         case 13: _t->on_pushButtonTimer_clicked(); break;
-        case 14: _t->on_pushButton_clicked(); break;
+        case 14: _t->on_pushButtonStream_clicked(); break;
         default: ;
         }
     }
