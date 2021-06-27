@@ -1,7 +1,10 @@
 QT       += core gui
 QT       += serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
+greaterThan(QT_MAJOR_VERSION, 4): CONFIG += c++11
+lessThan(QT_MAJOR_VERSION, 5): QMAKE_CXXFLAGS += -std=c++11
 CONFIG += c++11
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -13,12 +16,14 @@ SOURCES += \
     image.cpp \
     main.cpp \
     mainwindow.cpp \
+    qcustomplot.cpp \
     streamform.cpp
 
 HEADERS += \
     formimagelist.h \
     image.h \
     mainwindow.h \
+    qcustomplot.h \
     streamform.h
 
 FORMS += \

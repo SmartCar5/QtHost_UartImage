@@ -6,6 +6,7 @@
 #include <QByteArray>
 
 extern uint8_t dataBuffer[40];
+extern bool dataFlag;
 
 streamForm::streamForm(QWidget *parent) :
     QWidget(parent),
@@ -25,10 +26,14 @@ streamForm::~streamForm()
 
 void streamForm::showData()
 {
-    for(int i = 0;i<40;i++)
+    if(dataFlag==true)
     {
-        data.append(dataBuffer[i]);
+        for(int i = 0;i<40;i++)
+        {
+            data.append(dataBuffer[i]);
+        }
+        ui->textEdit->append(QString(data.toHex()));
+        data.clear();
+        dataFlag = false;
     }
-    ui->textEdit->append(QString(data.toHex()));
-    data.clear();
 }

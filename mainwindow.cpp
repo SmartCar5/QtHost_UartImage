@@ -9,6 +9,7 @@
 #include "image.h"
 
 uint8_t dataBuffer[40];
+bool dataFlag;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -120,17 +121,18 @@ void MainWindow::serialPort_readData()
             for(int i = 2;i<buffer.length();i++)
             {
                 //if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
-                SerialBuffer.append(buffer.data()[i]);
-                if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
+                //SerialBuffer.append(buffer.data()[i]);
+                if(i<=buffer.length()-2&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
                 {
-                    buffer = serial.readAll();
-                    memcpy(&dataBuffer[0],SerialBuffer.data(),40);
+                    //buffer = serial.readAll();
+                    memcpy(&dataBuffer[0],SerialBuffer.data(),SerialBuffer.length());
                     SerialBuffer.clear();
                     nowFlag = 0;
                     dataFlag = true;
                     break;
                     //nowFlag = 2;
                 }
+                SerialBuffer.append(buffer.data()[i]);
             }
         }
     }
@@ -140,10 +142,10 @@ void MainWindow::serialPort_readData()
         for(int i = 0;i<buffer.length();i++)
         {
             //if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
-            SerialBuffer.append(buffer.data()[i]);
-            if(i<buffer.length()-3&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
+            //SerialBuffer.append(buffer.data()[i]);
+            if(i<=buffer.length()-2&&buffer.data()[i]==0x59&&buffer.data()[i+1]==0x59)
             {
-                buffer = serial.readAll();
+                //buffer = serial.readAll();
                 memcpy(&dataBuffer[0],SerialBuffer.data(),40);
                 SerialBuffer.clear();
                 nowFlag = 0;
@@ -151,6 +153,7 @@ void MainWindow::serialPort_readData()
                 break;
                 //nowFlag = 2;
             }
+            SerialBuffer.append(buffer.data()[i]);
         }
 
     }

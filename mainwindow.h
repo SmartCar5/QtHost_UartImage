@@ -59,7 +59,7 @@ private:
     bool isSerialOpened;
     bool isDispImg;
     bool imgFlag;
-    bool dataFlag;
+    //bool dataFlag;
     bool isSave;
     bool isStream;
     bool isTimerOn;
