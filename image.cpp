@@ -1005,8 +1005,8 @@ void ordinary_two_line(void)
         {
             left_line[i] = my_road[i].connected[j_continue[i]].left;
             right_line[i] = my_road[i].connected[j_continue[i]].right;
-            IMG[i][left_line[i]] = blue;
-            IMG[i][right_line[i]] = red;
+            IMG[i][left_line[i]] = image_blue;
+            IMG[i][right_line[i]] = image_red;
         }
         else
         {
@@ -8947,11 +8947,11 @@ void image_InitEdgeLine(void)
         ptrLedge++, ptrRiedge++;
         if (leftEdge[i] != MISS)
         {
-            IMG[i][leftEdge[i]] = blue;
+            IMG[i][leftEdge[i]] = image_blue;
         }
         if (rightEdge[i] != MISS)
         {
-            IMG[i][rightEdge[i]] = red;
+            IMG[i][rightEdge[i]] = image_red;
         }
     }
 
@@ -9008,8 +9008,8 @@ void image_InitRoadLine(void)
         *ptrRiedge = (ptrMyRoad->connected[allRoadNum[i]]).right;
         ptrMyRoad++;
         ptrLedge++, ptrRiedge++;
-        IMG[i][leftEdge[i]] = blue;
-        IMG[i][rightEdge[i]] = red;
+        IMG[i][leftEdge[i]] = image_blue;
+        IMG[i][rightEdge[i]] = image_red;
     }
 }
 
@@ -12109,7 +12109,7 @@ break;
                     {
                         left_line[i] = 0;
                     }
-                    IMG[i][left_line[i]] = red;
+                    IMG[i][left_line[i]] = image_red;
                 }
             }
             get_mid_line();
@@ -12172,7 +12172,7 @@ break;
                     {
                         right_line[i] = 187;
                     }
-                    IMG[i][right_line[i]] = red;
+                    IMG[i][right_line[i]] = image_red;
                 }
             }
             get_mid_line();

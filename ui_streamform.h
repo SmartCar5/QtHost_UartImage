@@ -9,9 +9,9 @@
 #ifndef UI_STREAMFORM_H
 #define UI_STREAMFORM_H
 
+#include <qcustomplot.h>
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -19,16 +19,16 @@ QT_BEGIN_NAMESPACE
 class Ui_streamForm
 {
 public:
-    QTextEdit *textEdit;
+    QCustomPlot *customPlot;
 
     void setupUi(QWidget *streamForm)
     {
         if (streamForm->objectName().isEmpty())
             streamForm->setObjectName(QString::fromUtf8("streamForm"));
-        streamForm->resize(400, 300);
-        textEdit = new QTextEdit(streamForm);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(10, 10, 381, 281));
+        streamForm->resize(971, 565);
+        customPlot = new QCustomPlot(streamForm);
+        customPlot->setObjectName(QString::fromUtf8("customPlot"));
+        customPlot->setGeometry(QRect(10, 10, 951, 501));
 
         retranslateUi(streamForm);
 

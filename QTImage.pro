@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += serialport
+QT += gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
@@ -30,6 +31,13 @@ FORMS += \
     formimagelist.ui \
     mainwindow.ui \
     streamform.ui
+
+INCLUDEPATH += \
+    D:/opencv-4.4.0/opencv-4.4.0/build/install/include/opencv2 \
+    D:/opencv-4.4.0/opencv-4.4.0/build/install/include
+
+LIBS += \
+    -LD:/opencv-4.4.0/opencv-4.4.0/build/install/x64/vc16/lib -lopencv_world440d
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

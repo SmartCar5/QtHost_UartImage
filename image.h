@@ -27,9 +27,9 @@
 /////////////////////////////
 #define black 0
 #define white 1
-#define blue  2
+#define image_blue  2
 #define green 3
-#define red   4
+#define image_red   4
 #define gray  5
 #define purple 6
 ///////////////////////////

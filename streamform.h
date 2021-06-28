@@ -2,7 +2,11 @@
 #define STREAMFORM_H
 
 #include <QWidget>
-
+#include <QTimer>
+//#include "qcustomplot.h"
+#include <QRandomGenerator>
+//using namespace cv;
+using namespace std;
 namespace Ui {
 class streamForm;
 }
@@ -18,6 +22,13 @@ public:
 private:
     Ui::streamForm *ui;
     QByteArray data;
+    QTimer dataTimer;
+public:
+    void setupRealtimeDataDemo(void *customPlot);
+private slots:
+    //void showFrame();
+    void refreshData();
+    void realtimeDataSlot();
 
 private slots:
     void showData();
